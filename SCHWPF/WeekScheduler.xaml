@@ -1,0 +1,203 @@
+﻿<UserControl x:Class="WpfScheduler.WeekScheduler"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1280"
+             xmlns:my="clr-namespace:WpfScheduler" Loaded="UserControl_Loaded">
+
+    <!--<Slider Grid.Row="0" Name="_zoom" Minimum="1" Maximum="2" />
+    <Grid.LayoutTransform>
+                    <ScaleTransform ScaleX="{Binding Path=Value, ElementName=_zoom}" ScaleY="{Binding Path=Value, ElementName=_zoom}" />
+                </Grid.LayoutTransform>
+    -->
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.ColumnSpan="3">
+            <Border Background="White"></Border>
+        </Grid>
+        <my:SchedulerGrid x:Name="EventsHeaderGrid" Grid.Row="0" Grid.Column="1"
+                          ShowCustomGridLines="True" GridLineBrush="{x:Null}" GridLineThickness="2" Margin="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--Week days-->
+            <Border Grid.Column="1" Background="White" BorderThickness="2,0,1,0">
+                <TextBlock x:Name="dayLabel1" Grid.Row="0" Text="Mon 27/5" Foreground="Black" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap"/>
+            </Border>
+            <Border Grid.Column="2" Background="White" BorderThickness="1,0,1,0">
+                <TextBlock x:Name="dayLabel2" Grid.Row="0" Grid.Column="2" Text="Tue 28/5" Foreground="Black" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" TextWrapping="Wrap"/>
+            </Border>
+            <Border Grid.Column="3" Background="White" BorderThickness="2,0,1,0">
+                <TextBlock x:Name="dayLabel3" Grid.Row="0" Grid.Column="3" Text="Wed 29/5" Foreground="Black" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap"/>
+            </Border>
+            <Border Grid.Column="4" Background="White" BorderThickness="2,0,1,0">
+                <TextBlock x:Name="dayLabel4" Grid.Row="0" Grid.Column="4" Text="Thu 30/5" Foreground="Black" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap"/>
+            </Border>
+            <Border Grid.Column="5" Background="White" BorderThickness="2,0,1,0">
+                <TextBlock x:Name="dayLabel5" Grid.Row="0" Grid.Column="5" Text="Fri 31/5" Foreground="Black" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap"/>
+            </Border>
+            <Border Grid.Column="6" Background="White" BorderThickness="2,0,1,0">
+                <TextBlock x:Name="dayLabel6" Grid.Row="0" Grid.Column="6" Text="Sat 1/6" Foreground="Black" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap"/>
+            </Border>
+            <Border Grid.Column="7" Background="White" BorderThickness="1,0,2,0" Margin="0">
+                <TextBlock x:Name="dayLabel7" Grid.Row="0" Grid.Column="7" Text="Sun 2/6" Foreground="Black" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" TextWrapping="Wrap"/>
+            </Border>
+            <!-- All day events -->
+            <StackPanel x:Name="allDayEvents" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="7"
+                        Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+        </my:SchedulerGrid>
+
+
+        <Border BorderBrush="White" BorderThickness="0.5" Grid.Row="2" Margin="0" Grid.Column="1">
+            <ScrollViewer x:Name="ScrollEventsViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+
+                <my:SchedulerGrid x:Name="EventsGrid"
+                              ShowCustomGridLines="True" GridLineBrush="White" GridLineThickness="2">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+
+                    </Grid.RowDefinitions>
+
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="1"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="3"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="5"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="7"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="9"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="11"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="13"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="15"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="17"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="19"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="21"></Rectangle>
+                    <Rectangle Fill="White" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="23"></Rectangle>
+
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="0"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="2"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="4"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="6"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="8"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="10"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="12"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="14"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="16"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="18"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="20"></Rectangle>
+                    <Rectangle Fill="Black" Grid.Column="1" Grid.ColumnSpan="7" Opacity="0.2" Grid.Row="22"></Rectangle>
+                    <!-- Hours -->
+                    <Label Grid.Row="0" Grid.Column="0" Content="00:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Content="01:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="2" Grid.Column="0" Content="02:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="3" Grid.Column="0" Content="03:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="4" Grid.Column="0" Content="04:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="5" Grid.Column="0" Content="05:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="6" Grid.Column="0" Content="06:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="7" Grid.Column="0" Content="07:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="8" Grid.Column="0" Content="08:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="9" Grid.Column="0" Content="09:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="10" Grid.Column="0" Content="10:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="11" Grid.Column="0" Content="11:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="12" Grid.Column="0" Content="12:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="13" Grid.Column="0" Content="13:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="14" Grid.Column="0" Content="14:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="15" Grid.Column="0" Content="15:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="16" Grid.Column="0" Content="16:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="17" Grid.Column="0" Content="17:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="18" Grid.Column="0" Content="18:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="19" Grid.Column="0" Content="19:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="20" Grid.Column="0" Content="20:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="21" Grid.Column="0" Content="21:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="22" Grid.Column="0" Content="22:00" Foreground="White" FontSize="20"></Label>
+                    <Label Grid.Row="23" Grid.Column="0" Content="23:00" Foreground="White" FontSize="20"></Label>
+
+                    <!-- Start and end journey -->
+                    <StackPanel x:Name="startJourney" Opacity="0.5" Background="LightCoral" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="7" Orientation="Horizontal" VerticalAlignment="Stretch"></StackPanel>
+                    <StackPanel x:Name="endJourney"   Opacity="0.5" Background="LightCoral" Grid.Column="1" Grid.Row="23" Grid.ColumnSpan="7" Orientation="Horizontal" VerticalAlignment="Stretch"></StackPanel>
+
+                    <!-- Canvas  -->
+                    <Canvas x:Name="column1" Grid.Column="1" Grid.Row="0" Grid.RowSpan="22" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Canvas >
+                    <Canvas x:Name="column2" Grid.Column="2" Grid.Row="0" Grid.RowSpan="22" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Canvas >
+                    <Canvas x:Name="column3" Grid.Column="3" Grid.Row="0" Grid.RowSpan="22" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Canvas >
+                    <Canvas x:Name="column4" Grid.Column="4" Grid.Row="0" Grid.RowSpan="22" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Canvas >
+                    <Canvas x:Name="column5" Grid.Column="5" Grid.Row="0" Grid.RowSpan="22" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Canvas >
+                    <Canvas x:Name="column6" Grid.Column="6" Grid.Row="0" Grid.RowSpan="22" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Canvas >
+                    <Canvas  x:Name="column7" Grid.Column="7" Grid.Row="0" Grid.RowSpan="22" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+
+                        <Border Width="100" Height="100" Background="Green" VerticalAlignment="Top" Margin="0 200 0 0">
+
+                        </Border>
+
+                        <Border Width="100" Height="100" Background="Yellow" VerticalAlignment="Top" Margin="0 350 0 0">
+
+                        </Border>
+
+                    </Canvas >
+
+                </my:SchedulerGrid>
+            </ScrollViewer>
+        </Border>
+        <Button x:Name="btnPreviousWeek" Click="btnPreviousWeek_Click" Grid.Row="2" />
+        <Button x:Name="btnNextWeek" Click="btnNextWeek_Click" Grid.Column="2" Grid.Row="2"/>
+    </Grid>
+</UserControl>

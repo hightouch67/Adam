@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="CMWPF.UserControls.MyBoardUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CMWPF.UserControls"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d" 
+             d:DesignHeight="636" d:DesignWidth="1280">
+    <Grid Background="#FFD1C4E9">
+        <Grid  Margin="50,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnlistofthera" Tag="Mes archives"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" Background="{DynamicResource BrushViolet}"  Margin="0" >
+                <Button.Content>
+                    <fa:ImageAwesome Icon="FolderOpen" Foreground="White"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="btnsavethera" Tag="Paramètres généraux"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" Background="{DynamicResource BrushViolet}" FontWeight="Bold"  Grid.Column="1">
+                <Button.Content>
+                    <fa:ImageAwesome Icon="Gears" Foreground="White"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="btnfindthera" Tag="Confidentialité"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" Background="{DynamicResource BrushViolet}" FontWeight="Bold" Margin="0" Grid.Column="2">
+                <Button.Content>
+                    <fa:ImageAwesome Icon="Lock" Foreground="White"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,60 @@
+﻿<Window x:Class="CMWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CMWPF"
+        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:sch="clr-namespace:WpfScheduler;assembly=WpfScheduler"
+        xmlns:usercontrol="clr-namespace:CMWPF.UserControls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" Loaded="Window_Loaded" WindowState="Maximized">
+    <Viewbox>
+        <Grid Height="720" Width="1280">
+            <TabControl x:Name="TabControl" BorderThickness="0" Margin="0">
+                <TabItem Header="{DynamicResource MyInfo}" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource TabItemStyle}" Background="{DynamicResource BrushBleu}" Width="238">
+                    <usercontrol:MyProfilUC x:Name="MyProfilUC"/>
+                </TabItem>
+                <TabItem Header="{DynamicResource Scheduler}"  Style="{DynamicResource TabItemStyle}" Background="{DynamicResource BrushGreen}" Width="190">
+                    <usercontrol:MySchedulerUC x:Name="MySchedulerUC"/>
+                </TabItem>
+                <TabItem Header="{DynamicResource Care}" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{DynamicResource TabItemStyle}" Background="{DynamicResource BrushRed}" Width="211">
+                    <usercontrol:MyCareUC x:Name="MyCareUC"/>
+                </TabItem>
+                <TabItem Header="{DynamicResource ToDo}" HorizontalAlignment="Left" Style="{DynamicResource TabItemStyle}" Background="{DynamicResource BrushOrange}" Width="136">
+                    <usercontrol:ToDoUC x:Name="ToDoUC"/>
+                </TabItem>
+                <TabItem Header="{DynamicResource Board}" HorizontalAlignment="Left" Style="{DynamicResource TabItemStyle}" Background="{DynamicResource BrushYellow}" Width="151">
+                    <usercontrol:NewsPaperUC x:Name="NewsPaperUC"/>
+                </TabItem>
+                <TabItem Header="{DynamicResource Transport}" HorizontalAlignment="Left" Style="{DynamicResource TabItemStyle}" Background="{DynamicResource BrushGray}"/>
+                <TabItem Header="{DynamicResource MyArchive}" HorizontalAlignment="Left" Style="{DynamicResource TabItemStyle}" Background="{DynamicResource BrushViolet}" BorderBrush="{DynamicResource BrushWhiteForm}" Width="167">
+                    <usercontrol:MyBoardUC x:Name="MyBoardUC"/>
+                </TabItem>
+            </TabControl>
+            <Button Width="50" Height="80" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Click_1" Visibility="Collapsed" ></Button>
+            <usercontrol:UserLoginUC x:Name="loggerUC" IsVisibleChanged="UserLoginUC_IsVisibleChanged" d:IsHidden="True"  Visibility="Collapsed"/>
+            <Grid VerticalAlignment="Bottom" Height="155" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="TextBox1"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"  TextWrapping="Wrap" />
+                <Label Name="LabelHypothesized" Grid.Row="1" Grid.Column="0" Foreground="Green" >Hypothesized</Label>
+                <Label Name="LabelRecognized" Grid.Row="1" Grid.Column="1" Foreground="Green" >Recognized</Label>
+                <Button Name="ButtonStart" Grid.Row="1" Grid.Column="3" Content="Start" Click="ButtonStart_Click" Width="80" IsEnabled="False"></Button>
+                <Label Name="LabelStatus" Grid.Row="2" Grid.Column="0" FontSize="10" Foreground="Red">Status:</Label>
+                <Label Name="Label1" Grid.Row="2" Grid.Column="3" FontSize="10">Speak "End Dictate" to stop.</Label>
+            </Grid>
+            <Button Click="ButtonStart_Click" Width="50" Height="50" VerticalAlignment="Bottom"/>
+            <Image Visibility="Collapsed" x:Name="image" Source="Images/scqsc.png" HorizontalAlignment="Right" Margin="0,0,-223,0"/>
+        </Grid>
+    </Viewbox>
+</Window>

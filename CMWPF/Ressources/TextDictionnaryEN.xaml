@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:CMWPF.Ressources">
+
+
+    <sys:String x:Key="MyInfo">PERSONAL INFORMATIONS</sys:String>
+    <sys:String x:Key="Scheduler">SCHEDULER</sys:String>
+    <sys:String x:Key="Care">CARE</sys:String>
+    <sys:String x:Key="ToDo">TO DO</sys:String>
+    <sys:String x:Key="Board">BOARD</sys:String>
+    <sys:String x:Key="Transport">TRANSPORT</sys:String>
+    <sys:String x:Key="MyArchive">MY ARCHIVES</sys:String>
+
+
+
+    <sys:String x:Key="Subject">Subject</sys:String>
+
+</ResourceDictionary>

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMWPF", "CMWPF\CMWPF.csproj", "{B16A03C7-1EC3-4A99-A2A9-AB0B8CDC00EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfScheduler", "SCHWPF\WpfScheduler.csproj", "{F9954C26-6234-43F5-8D96-8EC6E03C03B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B16A03C7-1EC3-4A99-A2A9-AB0B8CDC00EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B16A03C7-1EC3-4A99-A2A9-AB0B8CDC00EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B16A03C7-1EC3-4A99-A2A9-AB0B8CDC00EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B16A03C7-1EC3-4A99-A2A9-AB0B8CDC00EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9954C26-6234-43F5-8D96-8EC6E03C03B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9954C26-6234-43F5-8D96-8EC6E03C03B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9954C26-6234-43F5-8D96-8EC6E03C03B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9954C26-6234-43F5-8D96-8EC6E03C03B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://cetinkayaozden.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CMWPF\\CMWPF.csproj
+		SccProjectName1 = CMWPF
+		SccLocalPath1 = CMWPF
+		SccProjectUniqueName2 = SCHWPF\\WpfScheduler.csproj
+		SccProjectName2 = SCHWPF
+		SccLocalPath2 = SCHWPF
+	EndGlobalSection
+EndGlobal

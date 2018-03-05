@@ -1,0 +1,991 @@
+﻿<UserControl x:Class="CMWPF.UserControls.MyCareUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CMWPF.UserControls"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:usercontrol="clr-namespace:CMWPF.UserControls"
+             xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="636" d:DesignWidth="1280">
+    <UserControl.Resources>
+        <DataTemplate x:Key="DataTemplateTherapist">
+            <Grid Grid.RowSpan="2" MaxWidth="700">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="280"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                               Margin="20,0,0,0" FontWeight="Bold" FontSize="48">
+                            <Run Text="{Binding careName}"></Run>
+                            <Run Text="{Binding careFunction}"></Run>
+                    </TextBlock>
+                    <TextBlock Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                               Margin="20,0,0,0" FontWeight="Bold" FontSize="48" Text="{Binding therapistFunction}"></TextBlock>
+
+                </StackPanel>
+                <Border Margin="20,120,0,0" Background="#33FFFFFF" CornerRadius="20" VerticalAlignment="Top" Grid.ColumnSpan="3">
+                    <Grid Margin="10,3" VerticalAlignment="Top">
+                        <Grid Margin="0" Width="200"  HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Image x:Name="imgPhotoA" Stretch="UniformToFill" Source="{Binding carePic1}"></Image>
+                            <Rectangle MouseLeftButtonDown="Control_MouseLeftButtonDown">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding Source, ElementName=imgPhotoA}" Stretch="UniformToFill"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Image x:Name="imgPhotoB" Stretch="UniformToFill" Source="{Binding carePic2}" Grid.Row="1"></Image>
+                            <Rectangle MouseLeftButtonDown="Control_MouseLeftButtonDown" Grid.Row="1">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding Source, ElementName=imgPhotoB}" Stretch="UniformToFill"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Grid>
+                        <Grid Margin="220,5,0,0" VerticalAlignment="Top" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Prescripteur :" Style="{DynamicResource TextBlockStyleForm}"/>
+                            <TextBlock  Grid.Column="1" Style="{DynamicResource TextBlockStyleForm}" 
+                                        IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding carePrescriptor}"/>
+                            <TextBlock Text="Posologie :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="1"/>
+                            <TextBlock Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" Grid.Row="1" 
+                                       IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding carePoso}"/>
+                            <Grid Grid.Column="1" Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <!--<Calendar DisplayMode="Year"></Calendar>-->
+                            </Grid>
+                            <TextBlock Text="Fonction :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="4"/>
+                            <TextBox x:Name="txtbFunction" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="4" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                        </Grid>
+                        <StackPanel Grid.Column="2" Margin="220,0,0,0" VerticalAlignment="Top">
+                            <Button x:Name="btnRetour" Content="RETOUR" Style="{DynamicResource ButtonStyle}"   
+                                    Background="{DynamicResource BrushRed}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" Visibility="Collapsed" />
+                            <Button x:Name="btnModif" Content="MODIFIER" Style="{DynamicResource ButtonStyle}"  
+                                    Background="{DynamicResource BrushGreen}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20"  />
+                            <Button x:Name="btnCancel" Content="ANNULER" Style="{DynamicResource ButtonStyle}"  
+                                    Background="{DynamicResource BrushRed}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" IsEnabled="False" />
+                            <Button x:Name="btnSave" Content="ENREGISTRER" Style="{DynamicResource ButtonStyle}" 
+                                    Background="{DynamicResource BrushGreen}" Foreground="White" FontSize="28" FontWeight="Bold"  IsEnabled="False"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Margin="20,20,0,20" Grid.Row="1" Background="#33FFFFFF" CornerRadius="20" Grid.ColumnSpan="2">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                      
+                        <TextBlock  Style="{DynamicResource TextBlockStyleForm}" TextWrapping="Wrap">
+                        <Run Text="Médecin prescripteur :"></Run>
+                            <Run  Text="{Binding carePrescriptor}"></Run>
+                        </TextBlock>
+                        <!--<TextBlock Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding carePrescriptor}"/>-->
+                        <TextBlock Text="Posologie :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="1"/>
+                        <TextBlock Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" Grid.Row="1" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding carePoso}"/>
+                        <TextBlock Text="Durée du traitement :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="2"/>
+                        <TextBlock Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" Grid.Row="2" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding careDuring}"/>
+                        <TextBlock Text="Date de fin de traitement :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="3"/>
+                        <TextBlock Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" Grid.Row="3" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding careEndDate}"/>
+                        <TextBlock Text="Effets secondaires possibles :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="4"/>
+                        <TextBlock Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" Grid.Row="4" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding careSecondaryEffect}"/>
+                        <TextBlock Text="Informations complémentaires :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="5" MaxWidth="230" HorizontalAlignment="Left" Width="210"/>
+                        <TextBlock Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" Grid.Row="5" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" TextWrapping="Wrap" Text="{Binding careComplementaryInfo}"/>
+                    </Grid>
+                </Border>
+                <Grid x:Name="ConfirmEditPopup" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                    <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                        <Grid>
+                            <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" 
+                                    CornerRadius="20,20,0,0">
+                                <TextBlock Text="MODIFICATION DE MA FICHE" FontSize="28" FontWeight="Bold" 
+                                           Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                            </Border>
+                            <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="btnUndo" Content="ANNULER" Style="{DynamicResource ButtonStyle}" 
+                                        Background="{DynamicResource BrushRed}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0"  />
+                                <Button x:Name="btnConfirm" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" 
+                                        Background="{DynamicResource BrushGreen}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid x:Name="ConfirmCancelPopup" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                    <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                        <Grid>
+                            <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                                <TextBlock Text="ANNULER MODIFICATION" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                            </Border>
+                            <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="btUndo" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0" />
+                                <Button x:Name="btConfirmCancel" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" 
+                                        Background="{DynamicResource BrushGreen}" Foreground="White" FontSize="28" FontWeight="Bold" 
+                                        Margin="10,0,0,0" Grid.Column="1"  />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid x:Name="ConfirmSavePopup" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                    <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                        <Grid>
+                            <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                                <TextBlock Text="ENREGISTRER MA FICHE" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                            </Border>
+                            <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="btndo" Content="ANNULER" Style="{DynamicResource ButtonStyle}" 
+                                        Background="{DynamicResource BrushRed}" Foreground="White" FontSize="28" 
+                                        FontWeight="Bold" Margin="0,0,10,0"  />
+                                <Button x:Name="btConfirmSave" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" 
+                                        Background="{DynamicResource BrushGreen}" Foreground="White" FontSize="28" FontWeight="Bold" 
+                                        Margin="10,0,0,0" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DataTemplateCare">
+            <Grid Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0" 
+                               FontWeight="Bold" FontSize="48">
+                            <Run Text="{Binding careName}"></Run>
+                            <Run Text="{Binding therapistLastName}"></Run>
+                    </TextBlock>
+                    <TextBlock Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0" 
+                               FontWeight="Bold" FontSize="48" Text="{Binding therapistFunction}"></TextBlock>
+
+                </StackPanel>
+                <Border Margin="20,120,0,0" Background="#33FFFFFF" CornerRadius="20" VerticalAlignment="Top" Grid.ColumnSpan="3">
+                    <Grid Margin="10,3">
+                        <Grid Margin="0" Width="200" Height="200" HorizontalAlignment="Left">
+                            <Control Template="{DynamicResource ControlTemplateProfil}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <Image x:Name="imgPhoto" Stretch="UniformToFill" Source="{Binding therapistPic}"></Image>
+                            <Rectangle MouseLeftButtonDown="Control_MouseLeftButtonDown">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding Source, ElementName=imgPhoto}" Stretch="UniformToFill"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Grid>
+                        <Grid Margin="220,5,0,0" VerticalAlignment="Top" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Nom :" Style="{DynamicResource TextBlockStyleForm}"/>
+                            <TextBlock x:Name="txtbName"  Grid.Column="1" Style="{DynamicResource TextBlockStyleForm}" 
+                                       IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding therapistName}"/>
+                            <TextBlock Text="Prénom :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="1"/>
+                            <TextBlock x:Name="txtbLastName" Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" 
+                                       Grid.Row="1" IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding therapistLastName}"/>
+                            <Grid Grid.Column="1" Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <!--<Calendar DisplayMode="Year"></Calendar>-->
+                            </Grid>
+                            <TextBlock Text="Fonction :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="4"/>
+                            <TextBox x:Name="txtbFunction" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" 
+                                     Grid.Row="4" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                        </Grid>
+                        <StackPanel Grid.Column="2" Margin="220,0,0,0" VerticalAlignment="Top">
+                            <Button x:Name="btnRetour" Content="RETOUR" Style="{DynamicResource ButtonStyle}" 
+                                    Background="{DynamicResource BrushRed}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" Visibility="Collapsed" />
+                            <Button x:Name="btnModif" Content="MODIFIER" Style="{DynamicResource ButtonStyle}" 
+                                    Background="{DynamicResource BrushGreen}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20"  />
+                            <Button x:Name="btnCancel" Content="ANNULER" Style="{DynamicResource ButtonStyle}" 
+                                    Background="{DynamicResource BrushRed}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" IsEnabled="False" />
+                            <Button x:Name="btnSave" Content="ENREGISTRER" Style="{DynamicResource ButtonStyle}" 
+                                    Background="{DynamicResource BrushGreen}" Foreground="White" FontSize="28" FontWeight="Bold"  IsEnabled="False"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Margin="20,20,0,20" Grid.Row="1" Background="#33FFFFFF" CornerRadius="20" Grid.ColumnSpan="2">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Adresse :" Style="{DynamicResource TextBlockStyleForm}"/>
+                        <TextBlock x:Name="txtbAdress" Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding therapistAdress}"/>
+                        <TextBlock Text="Téléphone :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="1"/>
+                        <TextBlock x:Name="txtbTel" Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" Grid.Row="1" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding therapistTel}"/>
+                        <TextBlock Text="Mail :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="2"/>
+                        <TextBlock x:Name="txtbMail" Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" Grid.Row="2" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Text="{Binding therapistMail}"/>
+                        <TextBlock Text="Informations complémentaires :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="3" 
+                                   MaxWidth="230" HorizontalAlignment="Left" Width="210"/>
+                        <TextBlock x:Name="txtbMoreInfo" Style="{DynamicResource TextBlockStyleForm}" Grid.Column="1" Grid.Row="3" 
+                                   IsEnabled="{Binding IsEnabled, ElementName=btnSave}" TextWrapping="Wrap" Text="{Binding therapistmoreInfo}"/>
+                    </Grid>
+                </Border>
+                <Grid x:Name="ConfirmEditPopup" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                    <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                        <Grid>
+                            <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                                <TextBlock Text="MODIFICATION DE MA FICHE" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                            </Border>
+                            <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="btnUndo" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0"  />
+                                <Button x:Name="btnConfirm" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid x:Name="ConfirmCancelPopup" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                    <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                        <Grid>
+                            <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                                <TextBlock Text="ANNULER MODIFICATION" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                            </Border>
+                            <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="btUndo" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0" />
+                                <Button x:Name="btConfirmCancel" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1"  />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid x:Name="ConfirmSavePopup" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                    <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                        <Grid>
+                            <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                                <TextBlock Text="ENREGISTRER MA FICHE" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                            </Border>
+                            <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="btndo" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0"  />
+                                <Button x:Name="btConfirmSave" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Background="#FFFFCDD2">
+        <Grid x:Name="Choose" Grid.RowSpan="3" Margin="50,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnli" Tag="Thérapeutes"  HorizontalAlignment="Right" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" 
+                    Background="{DynamicResource BrushRed}"  Margin="0,0,20,0" Click="btnli_Click">
+                <Button.Content>
+                    <Grid>
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.2"/>
+                        </Grid.Effect>
+                        <fa:ImageAwesome Icon="UserMd" Foreground="White"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="btns" Click="btns_Click" Tag="Traitement"  HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" 
+                    Background="{DynamicResource BrushRed}" FontWeight="Bold"  Grid.Column="1" Margin="20,0,0,0">
+                <Button.Content>
+                    <Grid>
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.2"/>
+                        </Grid.Effect>
+                        <fa:ImageAwesome Icon="Medkit" Foreground="White"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+        </Grid>
+        <Grid Grid.RowSpan="3" x:Name="StepTherapist" Margin="50,0" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnlistofthera" Tag="Liste des thérapeutes"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" 
+                    Background="{DynamicResource BrushRed}"  Margin="0" Click="btnlistofthera_Click">
+                <Button.Content>
+                    <Grid Margin="-50,0,0,0">
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.2"/>
+                        </Grid.Effect>
+                        <fa:ImageAwesome Icon="UserMd" Foreground="White"/>
+                        <Border Width="80" Height="80" Background="White" CornerRadius="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,-80,-20">
+                            <fa:ImageAwesome Icon="list" Foreground="{DynamicResource BrushRedUni}" Margin="10,20"/>
+                        </Border>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="btnsavethera" Tag="Enregistrer un thérapeute"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" 
+                    Background="{DynamicResource BrushRed}" FontWeight="Bold"  Grid.Column="1" Click="btnsavethera_Click">
+                <Button.Content>
+                    <Grid Margin="-50,0,0,0">
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.2"/>
+                        </Grid.Effect>
+                        <fa:ImageAwesome Icon="UserMd" Foreground="White"/>
+                        <Border Width="80" Height="80" Background="White" CornerRadius="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,-80,-20">
+                            <fa:ImageAwesome Icon="Plus" Foreground="{DynamicResource BrushRedUni}" Margin="10,20"/>
+                        </Border>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="btnfindthera" Tag="Retrouver un thérapeute"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" 
+                    Background="{DynamicResource BrushRed}" FontWeight="Bold" Margin="0" Grid.Column="2">
+                <Button.Content>
+                    <Grid Margin="-50,0,0,0">
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.2"/>
+                        </Grid.Effect>
+                        <fa:ImageAwesome Icon="UserMd" Foreground="White"/>
+                        <Border Width="80" Height="80" Background="White" CornerRadius="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,-80,-20">
+                            <fa:ImageAwesome Icon="Search" Foreground="{DynamicResource BrushRedUni}" Margin="10,20"/>
+                        </Border>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button  x:Name="btnbacktostep1" Content="Retour" FontSize="48" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{DynamicResource ButtonStyle}" 
+                     Background="White" FontWeight="Bold" Grid.ColumnSpan="3" Click="btnbacktostep1_Click" />
+        </Grid>
+        <Grid x:Name="TherapistList" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnprevioustherapist" Click="btnprevioustherapist_Click" Style="{DynamicResource ButtonStyle}" Width="100" Height="100">
+                <Button.Content>
+                    <Grid>
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.2"/>
+                        </Grid.Effect>
+                        <fa:ImageAwesome Icon="ArrowLeft" Foreground="White"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <Button x:Name="btnnexttherapist" Grid.Column="2" Click="btnnexttherapist_Click" Style="{DynamicResource ButtonStyle}" Width="100" Height="100">
+                <Button.Content>
+                    <Grid>
+                        <Grid.Effect>
+                            <DropShadowEffect Opacity="0.2"/>
+                        </Grid.Effect>
+                        <fa:ImageAwesome Icon="ArrowRight" Foreground="White"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
+            <ListView x:Name="therapistlist" Background="{x:Null}" ItemsSource="{Binding therapistCollection}" ItemTemplate="{DynamicResource DataTemplateTherapist}" 
+                      ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Column="1">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+            <Button Click="Button_Click" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Grid.Column="2"/>
+        </Grid>
+        <Grid Grid.RowSpan="3" x:Name="gridSaveThera" Visibility="Collapsed" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="135*"/>
+                <ColumnDefinition Width="121*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="0,0,0,0" Grid.RowSpan="3" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="67*"/>
+                    <ColumnDefinition Width="61*"/>
+                </Grid.ColumnDefinitions>
+                <Border Margin="20,70,20,0" Background="#33000000" CornerRadius="20" VerticalAlignment="Top">
+                    <Grid Margin="0,0">
+                        <Border Background="White" CornerRadius="20,20,0,0" Height="50" VerticalAlignment="Top" BorderThickness="4">
+                            <TextBlock Text="INFORMATIONS SUR MON RENDEZ-VOUS" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" 
+                                       Foreground="{DynamicResource BrushGreen}" FontFamily="Open Sans" Margin="10,0,0,0"/>
+                        </Border>
+                        <Grid Margin="10,70,10,10" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Jour :" Style="{DynamicResource TextBlockStyleForm}"/>
+                            <DatePicker Grid.Column="1" x:Name="dtDay" Style="{DynamicResource DatePickerStyle}" IsEnabled="{Binding IsEnabled, ElementName=btnSave}" ></DatePicker>
+                            <TextBlock Text="Heure :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="1"/>
+                            <toolkit:TimePicker x:Name="tpHour" TimeInterval="00:30" Grid.Column="1" Grid.Row="1" Style="{DynamicResource TimePickerStyleForm}" 
+                                                FontSize="24" IsEnabled="{Binding IsEnabled, ElementName=btnSave}" ></toolkit:TimePicker>
+                            <TextBox x:Name="txtbLastName" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="1" 
+                                     IsEnabled="{Binding IsEnabled, ElementName=btnSave}" Visibility="Collapsed"/>
+                            <TextBlock Text="Mots clé :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="2"/>
+                            <TextBox x:Name="txtbkeyword" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="2" 
+                                     IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                            <TextBlock Text="Informations complémentaires :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="3"/>
+                            <local:CalendarCmbUC x:Name="DtBorn" Grid.Column="1" Grid.Row="3" CmbAreEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                            <TextBlock Text="Répéter tout les jours :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="4"/>
+                            <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" >
+                                <RadioButton x:Name="rbYes" Content="Oui" GroupName="allday" FontSize="24"></RadioButton>
+                                <RadioButton x:Name="rbNo" Content="Non"  GroupName="allday" FontSize="24"></RadioButton>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+                <StackPanel Grid.ColumnSpan="2">
+                    <TextBlock Text="Gérer mon planning" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0" FontWeight="Bold" FontSize="48"/>
+                    <StackPanel/>
+                </StackPanel>
+                <Button x:Name="btnSaveNewEvent" Content="Enregistrer un Rendez-Vous" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                        Style="{DynamicResource ButtonStyle}" Background="White" FontWeight="Bold"  Width="650" Grid.ColumnSpan="2" Margin="315,0" />
+                <Border Margin="20,70,20,0" Background="#33000000" CornerRadius="20" VerticalAlignment="Top" Grid.Column="1">
+                    <Grid Margin="0,0">
+                        <Border Background="White" CornerRadius="20,20,0,0" Height="50" VerticalAlignment="Top" BorderThickness="4">
+                            <TextBlock Text="OPTIONS SUPPLEMENTAIRES" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" 
+                                       Foreground="{DynamicResource BrushGreen}" FontFamily="Open Sans" Margin="10,0,0,0"/>
+                        </Border>
+                        <Grid Margin="10,70,10,10" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="43*"/>
+                                <ColumnDefinition Width="12*"/>
+                                <ColumnDefinition Width="55*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Couleur de la case :" Style="{DynamicResource TextBlockStyleForm}" Grid.ColumnSpan="2" UseLayoutRounding="False"/>
+                            <toolkit:ColorPicker x:Name="colorPicker" Grid.Column="2" IsEnabled="{Binding IsEnabled, ElementName=btnSave}" 
+                                                 AvailableColorsSortingMode="HueSaturationBrightness" ShowRecentColors="False" ShowStandardColors="True" 
+                                                 ShowAdvancedButton="False" AvailableColorsHeader="Couleurs disponibles" Margin="0,0,0,10" Height="32" />
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3">
+                                <RadioButton Content="Texte en gras" Height="42" />
+                                <RadioButton Content="Texte en italique" Height="42" />
+                                <RadioButton Content="Texte souligné" Height="42" />
+                            </StackPanel>
+                            <TextBox x:Name="txtbLastName1" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="2" Grid.Row="1" IsEnabled="{Binding IsEnabled, ElementName=btnSave}" 
+                                     Visibility="Collapsed" UseLayoutRounding="False"/>
+                            <TextBlock Text="Durée du RDV :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="2" Grid.ColumnSpan="2" UseLayoutRounding="False"/>
+                            <ComboBox x:Name="cmbduring" Style="{DynamicResource ComboBoxStyleForm}" Grid.Column="2" Grid.Row="2" IsEnabled="{Binding IsEnabled, ElementName=btnSave}" 
+                                      UseLayoutRounding="False">
+                                <ComboBoxItem Content="15 minutes" HorizontalAlignment="Left" Width="273"/>
+                                <ComboBoxItem Content="30 minutes" HorizontalAlignment="Left" Width="273"/>
+                                <ComboBoxItem Content="45 minutes" HorizontalAlignment="Left" Width="273"/>
+                                <ComboBoxItem Content="1 heure" HorizontalAlignment="Left" Width="273" />
+                                <ComboBoxItem Content="2 heures" HorizontalAlignment="Left" Width="273"/>
+                                <ComboBoxItem Content="3 heures" HorizontalAlignment="Left" Width="273"/>
+                                <ComboBoxItem Content="4 heures" HorizontalAlignment="Left" Width="273"/>
+                                <ComboBoxItem Content="8 heures" HorizontalAlignment="Left" Width="273"/>
+                                <ComboBoxItem Content="Toute la journée" HorizontalAlignment="Left" Width="273" />
+                            </ComboBox>
+                            <TextBlock Text="Alarmes sonores :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="3" UseLayoutRounding="False"/>
+                            <ComboBox Style="{DynamicResource ComboBoxStyleForm}" Grid.Row="3" Grid.Column="1"></ComboBox>
+                            <TextBlock Grid.Column="2" Grid.Row="3" Text="Minutes avant le RDV" Style="{DynamicResource TextBlockStyleForm}" Margin="10,0,0,0" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Button  x:Name="btnbackto" Content="Retour" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyle}" 
+                     Background="White" FontWeight="Bold" Grid.Row="3"  Width="650" Grid.ColumnSpan="2" Margin="315,39"/>
+        </Grid>
+        <Grid x:Name="TherapistInfo" Grid.RowSpan="2" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Fiche du thérapeute" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0" FontWeight="Bold" FontSize="48" Grid.ColumnSpan="2">
+            </TextBlock>
+            <Border Margin="20,70,0,0" Background="#33FFFFFF" CornerRadius="20" VerticalAlignment="Top" Grid.ColumnSpan="3">
+                <Grid Margin="10,3">
+                    <Grid Margin="0" Width="200" Height="200" HorizontalAlignment="Left">
+                        <Control Template="{DynamicResource ControlTemplateProfil}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Image x:Name="imgPhoto" Stretch="UniformToFill"></Image>
+                        <Rectangle MouseLeftButtonDown="Control_MouseLeftButtonDown">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Source, ElementName=imgPhoto}" Stretch="UniformToFill"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
+                    <Grid Margin="220,5,0,0" VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Nom :" Style="{DynamicResource TextBlockStyleForm}"/>
+                        <TextBox x:Name="txtbName"  Grid.Column="1" Style="{DynamicResource TextBoxStyleForm}" IsEnabled="{Binding IsEnabled, ElementName=btnSave}" />
+                        <TextBlock Text="Prénom :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="1"/>
+                        <TextBox x:Name="txtbLastName0" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="1" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                        <Grid Grid.Column="1" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--<Calendar DisplayMode="Year"></Calendar>-->
+                        </Grid>
+                        <TextBlock Text="Fonction :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="4"/>
+                        <TextBox x:Name="txtbFunction" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="4" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Margin="20,20,0,20" Grid.Row="1" Background="#33FFFFFF" CornerRadius="20" Grid.ColumnSpan="2">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Adresse :" Style="{DynamicResource TextBlockStyleForm}"/>
+                    <TextBox x:Name="txtbAdress" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" AcceptsReturn="True" 
+                             IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                    <TextBlock Text="Téléphone :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="1"/>
+                    <TextBox x:Name="txtbTel" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="1" 
+                             IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                    <TextBlock Text="Mail :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="2"/>
+                    <TextBox x:Name="txtbMail" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="2" 
+                             IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                    <TextBlock Text="Informations complémentaires :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="3" MaxWidth="230" HorizontalAlignment="Left" Width="210"/>
+                    <TextBox x:Name="txtbMoreInfo" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="3" AcceptsReturn="True" 
+                             IsEnabled="{Binding IsEnabled, ElementName=btnSave}" TextWrapping="Wrap"/>
+                </Grid>
+            </Border>
+            <StackPanel Grid.Column="3" Margin="20,20,20,0" VerticalAlignment="Top">
+                <Button x:Name="btnRetour" Content="RETOUR" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" Click="btnRetour_Click" />
+                <Button x:Name="btnModif" Content="MODIFIER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" Click="btnModif_Click" IsEnabled="False" />
+                <Button x:Name="btnCancel" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" IsEnabled="False" Click="btnCancel_Click"/>
+                <Button x:Name="btnSave" Content="ENREGISTRER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                        Foreground="White" FontSize="28" FontWeight="Bold"              Click="btnSave_Click"  />
+            </StackPanel>
+            <Grid x:Name="ConfirmEditPopup" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                    <Grid>
+                        <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                            <TextBlock Text="MODIFICATION DE MA FICHE" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                        </Border>
+                        <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="btnUndo" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0"                        Click="btnUndo_Click"   />
+                            <Button x:Name="btnConfirm" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1" Click="btnConfirm_Click" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid x:Name="ConfirmCancelPopup" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                    <Grid>
+                        <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                            <TextBlock Text="ANNULER MODIFICATION" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                        </Border>
+                        <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="btUndo" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0" Click="btnUndo_Click" />
+                            <Button x:Name="btConfirmCancel" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1" Click="btConfirmCancel_Click" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid x:Name="ConfirmSavePopup" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                    <Grid>
+                        <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                            <TextBlock Text="ENREGISTRER MA FICHE" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                        </Border>
+                        <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="btndo" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0"  Click="btnUndo_Click"/>
+                            <Button x:Name="btConfirmSave" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1" Click="btConfirmSave_Click" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid x:Name="CareInfo" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Mon traitement" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0" FontWeight="Bold" FontSize="48" Grid.ColumnSpan="2"/>
+            <Border Margin="20,70,0,0" Background="#33FFFFFF" CornerRadius="20" VerticalAlignment="Top" Grid.ColumnSpan="3">
+                <Grid Margin="10,3">
+                    <Grid Margin="0" HorizontalAlignment="Left" Width="200">
+                        <StackPanel>
+                            <Control x:Name="ctrl1" Template="{DynamicResource ControlTemplateProfil}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="Control_MouseLeftButtonDown_1" />
+
+                            <Control x:Name="ctrl2" Template="{DynamicResource ControlTemplateProfil}" Margin="0,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="Control_MouseLeftButtonDown_2" />
+
+                            <Image x:Name="imgPhoto1" Stretch="UniformToFill"/>
+                            <Image x:Name="imgPhoto2" Stretch="UniformToFill"/>
+                            <Rectangle MouseLeftButtonDown="Control_MouseLeftButtonDown">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding Source, ElementName=imgPhoto}" Stretch="UniformToFill"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Rectangle MouseLeftButtonDown="Control_MouseLeftButtonDown">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding Source, ElementName=imgPhoto}" Stretch="UniformToFill"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="220,5,0,0" VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Nom :" Style="{DynamicResource TextBlockStyleForm}"/>
+                        <TextBox x:Name="txtbCareName"  Grid.Column="1" Style="{DynamicResource TextBoxStyleForm}" IsEnabled="{Binding IsEnabled, ElementName=btnSave}" />
+                        <TextBlock Text="Fonction :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="1"/>
+                        <TextBox x:Name="txtbCareFunction" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="1" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                        <Grid Grid.Column="1" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--<Calendar DisplayMode="Year"></Calendar>-->
+                        </Grid>
+                        <TextBlock Text="Médecin prescripteur" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="4"/>
+                        <TextBox x:Name="txtbPrescriptor" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="4" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                        <TextBlock Text="Posologie" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="5"/>
+                        <TextBox x:Name="txtbPoso" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="5" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                        <TextBlock Text="Durée traitement :" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="6"/>
+                        <TextBox x:Name="txtbCareDuring" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="6" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                        <TextBlock Text="Date de fin de traitement" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="7"/>
+                        <TextBox x:Name="txtbCareEnd" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="7" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                        <TextBlock Text="Effets secondaires possibles" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="8"/>
+                        <TextBox x:Name="txtbSecondaryEffects" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="8" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                        <TextBlock Text="Informations complémentaires" Style="{DynamicResource TextBlockStyleForm}" Grid.Row="9"/>
+                        <TextBox x:Name="txtbComplementaryInfo" Style="{DynamicResource TextBoxStyleForm}" Grid.Column="1" Grid.Row="9" IsEnabled="{Binding IsEnabled, ElementName=btnSave}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <StackPanel Grid.Column="3" Margin="20,20,20,0" VerticalAlignment="Top">
+                <Button x:Name="btnRetour1" Content="RETOUR" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" Click="btnRetour_Click" />
+                <Button x:Name="btnModif1" Content="MODIFIER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" Click="btnModif_Click" IsEnabled="False" />
+                <Button x:Name="btnCancel1" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                        Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,20" IsEnabled="False" Click="btnCancel_Click"/>
+                <Button x:Name="btnSave1" Content="ENREGISTRER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                        Foreground="White" FontSize="28" FontWeight="Bold"              Click="btnSave1_Click"  />
+            </StackPanel>
+            <Grid x:Name="ConfirmEditPopup1" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                    <Grid>
+                        <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                            <TextBlock Text="MODIFICATION DE MON TRAITEMENT" FontSize="28" FontWeight="Bold" Height="76" Width="388" Foreground="White" Margin="0,10" TextWrapping="Wrap"/>
+                        </Border>
+                        <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="btnUndo1" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0"                        Click="btnUndo_Click"   />
+                            <Button x:Name="btnConfirm1" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1" Click="btnConfirm1_Click" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid x:Name="ConfirmCancelPopup1" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                    <Grid>
+                        <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                            <TextBlock Text="ANNULER MODIFICATION" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                        </Border>
+                        <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="btUndo1" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0" Click="btnUndo_Click" />
+                            <Button x:Name="btConfirmCancel1" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1" Click="btConfirmCancel_Click" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid x:Name="ConfirmSavePopup1" Background="#B2000000" Grid.RowSpan="2" Grid.ColumnSpan="4" Visibility="Collapsed">
+                <Border CornerRadius="25" Width="500" Height="150" Background="{DynamicResource BrushGrey}">
+                    <Grid>
+                        <Border VerticalAlignment="Top" Background="{DynamicResource BrushBleu}" CornerRadius="20,20,0,0">
+                            <TextBlock Text="ENREGISTRER MA FICHE" FontSize="28" FontWeight="Bold" Height="38" Width="388" Foreground="White" Margin="0,10"/>
+                        </Border>
+                        <Grid VerticalAlignment="Top" Margin="20,80,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="btndo1" Content="ANNULER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushRed}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,10,0"  Click="btnUndo_Click"/>
+                            <Button x:Name="btConfirmSaveCare" Content="CONFIRMER" Style="{DynamicResource ButtonStyle}" Background="{DynamicResource BrushGreen}" 
+                                    Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0,0,0" Grid.Column="1" Click="btConfirmSaveCare_Click" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        
+        <Grid x:Name="CareList" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnpreviouscare" Click="btnpreviouscare_Click" Style="{DynamicResource ButtonStyle}" Width="100" Height="100">
+                <Grid>
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.2"/>
+                    </Grid.Effect>
+                    <fa:ImageAwesome Icon="ArrowLeft" Foreground="White"/>
+                </Grid>
+            </Button>
+            <Button x:Name="btnnextcare" Grid.Column="2" Click="btnnextcare_Click" Style="{DynamicResource ButtonStyle}" Width="100" Height="100">
+                <Grid>
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.2"/>
+                    </Grid.Effect>
+                    <fa:ImageAwesome Icon="ArrowRight" Foreground="White"/>
+                </Grid>
+            </Button>
+            <ListView x:Name="carelist" Background="{x:Null}" ItemsSource="{Binding careCollection}" ItemTemplate="{DynamicResource DataTemplateTherapist}" 
+                      ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Column="1">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+            <Button x:Name="btnBackFromCareList" Click="btnBackFromCareList_Click" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Grid.Column="2" Content="RETOUR"/>
+        </Grid>
+        <Grid x:Name="StepCare" Margin="50,0" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnlistofcare" Tag="Liste des traitements"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" Background="{DynamicResource BrushRed}"  Margin="0" Click="btnlistofcare_Click">
+                <Grid Margin="-50,0,0,0">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.2"/>
+                    </Grid.Effect>
+                    <fa:ImageAwesome Icon="Medkit" Foreground="White"/>
+                    <Border Width="80" Height="80" Background="White" CornerRadius="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,-80,-20">
+                        <fa:ImageAwesome Icon="list" Foreground="{DynamicResource BrushRedUni}" Margin="10,20"/>
+                    </Border>
+                </Grid>
+            </Button>
+            <Button x:Name="btnsavecare" Tag="Enregistrer un traitement"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" Background="{DynamicResource BrushRed}" FontWeight="Bold"  Grid.Column="1" Click="btnsavecare_Click">
+                <Grid Margin="-50,0,0,0">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.2"/>
+                    </Grid.Effect>
+                    <fa:ImageAwesome Icon="Medkit" Foreground="White"/>
+                    <Border Width="80" Height="80" Background="White" CornerRadius="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,-80,-20">
+                        <fa:ImageAwesome Icon="Plus" Foreground="{DynamicResource BrushRedUni}" Margin="10,20"/>
+                    </Border>
+                </Grid>
+            </Button>
+            <Button x:Name="btnfindcare" Tag="Retrouver un traitement"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyleBig}" Background="{DynamicResource BrushRed}" FontWeight="Bold" Margin="0" Grid.Column="2" Click="btnfindcare_Click">
+                <Grid Margin="-50,0,0,0">
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.2"/>
+                    </Grid.Effect>
+                    <fa:ImageAwesome Icon="Medkit" Foreground="White"/>
+                    <Border Width="80" Height="80" Background="White" CornerRadius="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,-80,-20">
+                        <fa:ImageAwesome Icon="Search" Foreground="{DynamicResource BrushRedUni}" Margin="10,20"/>
+                    </Border>
+                </Grid>
+            </Button>
+            <Button  x:Name="btnbacktostep2" Content="Retour" FontSize="48" HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom" Style="{DynamicResource ButtonStyle}" Background="White" 
+                     FontWeight="Bold" Grid.ColumnSpan="3" Click="btnbacktostep1_Click" />
+        </Grid>
+        <Grid x:Name="FindCare" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnpreviouscare1" Click="btnpreviouscare_Click" Style="{DynamicResource ButtonStyle}" Width="100" Height="100">
+                <Grid>
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.2"/>
+                    </Grid.Effect>
+                    <fa:ImageAwesome Icon="ArrowLeft" Foreground="White"/>
+                </Grid>
+            </Button>
+            <Button x:Name="btnnextcare1" Grid.Column="2" Click="btnnextcare_Click" Style="{DynamicResource ButtonStyle}" Width="100" Height="100">
+                <Grid>
+                    <Grid.Effect>
+                        <DropShadowEffect Opacity="0.2"/>
+                    </Grid.Effect>
+                    <fa:ImageAwesome Icon="ArrowRight" Foreground="White"/>
+                </Grid>
+            </Button>
+            <ListView x:Name="carelist1" Background="{x:Null}" ItemsSource="{Binding careCollection}" ItemTemplate="{DynamicResource DataTemplateTherapist}" 
+                ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Column="1">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+            <TextBox x:Name="txtbSearchCare" Grid.Column="1" Height="50" VerticalAlignment="Top" Margin="0,50,0,0" FontWeight="Bold" FontSize="16" TextChanged="TextBox_TextChanged"></TextBox>
+            <TextBlock Grid.Column="1" Height="70" VerticalAlignment="Top" Margin="0,80,0,0" Text="Veuillez effectuer une recherche"></TextBlock>
+            <Button x:Name="btnBackFromCareList1" Click="btnBackFromCareList_Click" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Grid.Column="2" Content="RETOUR"/>
+        </Grid>
+    </Grid>
+</UserControl>

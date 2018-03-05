@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CMWPF.App" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CMWPF.MainWindow.State" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MainWindow.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAgIAgMAAAABAAAAUAAQCAkCgAAAAAAgAAQAAAAICIQ=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.Classes.CustomSpeechRecognizer" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CMWPF.Classes.CustomSpeechRecognizer.State" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Classes\CustomSpeechRecognizer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAgIAgMAAAAIAAAAUAAQCAACgAAAAAAAAAQAAAAICIA=</HashCode>
+      <FileName>Classes\CustomSpeechRecognizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Classes.Friend">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAEQAAAABQAAACABAAEAAAAAAgAABAAAACAgAAAA=</HashCode>
+      <FileName>Classes\Friend.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Classes.Patient">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>VAIBAAAAAAAAAACAAAAIQBIAAAAAAQAAASAAAAYAAAA=</HashCode>
+      <FileName>Classes\Patient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Classes.Therapist">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQgBBAAAAAAAAAAAAAUAAEAAAAAAA0QBAAAAAAAAAIA=</HashCode>
+      <FileName>Classes\Therapist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Classes.Todo">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Todo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Classes.Functions.CollectionSaver" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Functions\CollectionSaver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Classes.Functions.ReadEvent" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Functions\ReadEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Classes.Functions.ReadPatient" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAACAAAAAEAAAAAAA=</HashCode>
+      <FileName>Classes\Functions\ReadPatient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Classes.Functions.ReadTherapist">
+    <Position X="5.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAgAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Functions\ReadTherapist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Classes.Functions.ReadToDo" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Classes\Functions\ReadToDo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Converters.BooleanToVisibilityConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\BooleanToVisibilityConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.Converters.InverseBooleanToVisibilityConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\InverseBooleanToVisibilityConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.Properties.Resources" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.Properties.Settings" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMWPF.UserControls.CalendarCmbUC" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACIAAIAAACBAAAAAAAAAAAACIAAUCEAABAAAAA=</HashCode>
+      <FileName>UserControls\CalendarCmbUC.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.UserControls.MyBoardUC" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\MyBoardUC.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.UserControls.MyCareUC" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAgQAAABAhGqAAAoEAEEEAjCAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\MyCareUC.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.UserControls.MyProfilUC" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAgQAQAAAhAiAAACEAEEEABCAABAAAQAQABQAAAA=</HashCode>
+      <FileName>UserControls\MyProfilUC.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.UserControls.MySchedulerUC" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAiAAAACAECCAAAAABAGAAQAAABBEwQEAgAEABAA=</HashCode>
+      <FileName>UserControls\MySchedulerUC.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.UserControls.NewsPaperUC" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\NewsPaperUC.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.UserControls.ToDoUC" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\ToDoUC.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CMWPF.UserControls.UserLoginUC" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAQoAAAAAAEAAABAAAAAAAAQABAAAAA=</HashCode>
+      <FileName>UserControls\UserLoginUC.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="WpfScheduler.EventUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
+        <Style x:Key="OptionMarkFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FFF3F9FF"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF3C77DD"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="#FF212121"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#FF212121"/>
+        <Style x:Key="CheckBoxStyleUC" TargetType="{x:Type CheckBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="checkBoxBorder" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.ColumnSpan="2" Width="30" Height="30">
+                                <Grid x:Name="markGrid">
+                                    <Path x:Name="optionMark" Data="M26.023729,3.2450696 L12.289652,23.742021 11.829844,23.742021 0.06097561,13.578058 3.3837982,9.2270822 11.135836,15.907605 21.750811,0.061015325 26.023729,3.2450696 z" Fill="{DynamicResource BrushGreen}" Margin="1,1,-44,-44" Opacity="0" Stretch="None" Stroke="White"/>
+                                    <Rectangle x:Name="indeterminateMark" Fill="{StaticResource OptionMark.Static.Glyph}" Margin="2" Opacity="0"/>
+                                </Grid>
+                            </Border>
+                            <ContentPresenter x:Name="contentPresenter" Grid.Column="0" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="Collapsed" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
+                                <Setter Property="Padding" Value="4,-1,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Border}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <!--<Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>-->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="0"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CheckBoxStyleDeclined" TargetType="{x:Type CheckBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="checkBoxBorder" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.ColumnSpan="2" Width="30" Height="30">
+                                <Grid x:Name="markGrid">
+                                    <Viewbox Width="25" Height="Auto" Canvas.Left="232.226" Canvas.Top="220.352" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Canvas Width="82" Height="90">
+                                            <Path Width="81.8813" Height="89.6022" Canvas.Left="0" Canvas.Top="0.0137691" Stretch="Fill" Fill="{DynamicResource BrushRed}" Data="F1 M 40.4956,53.8379C 40.7327,54.1912 40.884,54.4072 41.0257,54.6293C 48.1916,65.8553 55.3657,77.076 62.5047,88.3191C 63.077,89.2203 63.6695,89.6303 64.7909,89.6156C 69.9632,89.5483 75.1367,89.5885 80.3097,89.5815C 80.7532,89.5809 81.1965,89.5171 81.8813,89.4638C 71.3331,73.944 60.9252,58.6307 50.5173,43.3173C 60.6912,28.8816 70.772,14.5779 81.0149,0.0440063C 75.1245,0.0440063 69.5863,0.022522 64.0489,0.084137C 63.6011,0.0890503 63.0069,0.564697 62.7376,0.98587C 55.9654,11.5767 49.2281,22.1897 42.4824,32.7975C 42.242,33.1756 41.9787,33.5393 41.6551,34.0139C 41.357,33.6116 41.1569,33.3708 40.9884,33.1097C 34.1415,22.5017 27.2881,11.8979 20.4692,1.27188C 19.89,0.369446 19.2655,0 18.1631,0.0141602C 13.0975,0.0786743 8.03053,0.039978 2.96413,0.0470581C 2.52547,0.0477295 2.08693,0.112671 1.4908,0.1604C 1.9068,0.774292 2.19785,1.21173 2.4968,1.64398C 11.9245,15.2749 21.3368,28.9165 30.8117,42.5146C 31.5664,43.5976 31.4833,44.2564 30.7692,45.2769C 20.8079,59.5109 10.8912,73.7762 0.96759,88.0365C 0.661591,88.4763 0.39798,88.9458 0,89.5856C 5.87787,89.5856 11.4233,89.6184 16.9669,89.5361C 17.5407,89.5277 18.3023,88.9624 18.6424,88.4386C 23.2551,81.3335 27.8367,74.2079 32.366,67.0495C 35.0951,62.7361 37.7199,58.3568 40.4956,53.8379 Z " Stroke="White" StrokeThickness="3"/>
+                                            <Path Width="81.8813" Height="89.6022" Canvas.Left="0" Canvas.Top="0.0137691" Stretch="Fill" Fill="{DynamicResource BrushRed}" Data="F1 M 40.4956,53.8379C 37.7199,58.3568 35.0951,62.7361 32.366,67.0495C 27.8367,74.2079 23.2551,81.3335 18.6424,88.4386C 18.3023,88.9624 17.5407,89.5277 16.9669,89.5361C 11.4233,89.6184 5.87787,89.5856 0,89.5856C 0.39798,88.9458 0.661591,88.4763 0.96759,88.0365C 10.8912,73.7762 20.8079,59.5109 30.7692,45.2769C 31.4833,44.2564 31.5664,43.5976 30.8117,42.5146C 21.3368,28.9165 11.9245,15.2749 2.4968,1.64398C 2.19785,1.21173 1.9068,0.774292 1.4908,0.1604C 2.08693,0.112671 2.52547,0.0477295 2.96413,0.0470581C 8.03053,0.039978 13.0975,0.0786743 18.1631,0.0141602C 19.2655,0 19.89,0.369446 20.4692,1.27188C 27.2881,11.8979 34.1415,22.5017 40.9884,33.1097C 41.1569,33.3708 41.357,33.6116 41.6551,34.0139C 41.9787,33.5393 42.242,33.1756 42.4824,32.7975C 49.2281,22.1897 55.9654,11.5767 62.7376,0.98587C 63.0069,0.564697 63.6011,0.0890503 64.0489,0.084137C 69.5863,0.022522 75.1245,0.0440063 81.0149,0.0440063C 70.772,14.5779 60.6912,28.8816 50.5173,43.3173C 60.9252,58.6307 71.3331,73.944 81.8813,89.4638C 81.1965,89.5171 80.7532,89.5809 80.3097,89.5815C 75.1367,89.5885 69.9632,89.5483 64.7909,89.6156C 63.6695,89.6303 63.077,89.2203 62.5047,88.3191C 55.3657,77.076 48.1916,65.8553 41.0257,54.6293C 40.884,54.4072 40.7327,54.1912 40.4956,53.8379 Z " Stroke="White" StrokeThickness="3"/>
+                                        </Canvas>
+                                    </Viewbox>
+                                    <Rectangle x:Name="indeterminateMark" Fill="{StaticResource OptionMark.Static.Glyph}" Margin="2" Opacity="0"/>
+                                </Grid>
+                            </Border>
+                            <ContentPresenter x:Name="contentPresenter" Grid.Column="0" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="Collapsed" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
+                                <Setter Property="Padding" Value="4,-1,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Border}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <!--<Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>-->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Border}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="0"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Border x:Name="BorderElement" BorderBrush="Black" Background="LightGreen" HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch" Height="Auto" Margin="1">
+        <Grid Height="Auto">
+            <StackPanel Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Text="{DynamicResource Subject}"/>
+                <TextBlock x:Name="DisplayDescriptionText" FontSize="24" Padding="2" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Left" FontFamily="Open Sans"/>
+            </StackPanel>
+            <TextBlock x:Name="DisplayText" Text="{Binding Subject}" FontSize="10" Padding="2" TextWrapping="Wrap" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            <Grid Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <CheckBox x:Name="chkAccepted" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="False" Style="{DynamicResource CheckBoxStyleUC}" Width="30" Height="30" Background="{x:Null}" IsChecked="True" Visibility="Collapsed" Margin="-30,0,0,-30"/>
+                <CheckBox x:Name="chkDeclined" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="False" Style="{DynamicResource CheckBoxStyleDeclined}" Width="30" Height="30" Background="{x:Null}" IsChecked="True" Visibility="Collapsed" Margin="-30,0,0,-30"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
